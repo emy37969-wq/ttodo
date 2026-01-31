@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:todo2_application_1/feature/home/home-screen.dart';
 
-class Splashscreenl extends StatelessWidget {
+class Splashscreenl extends StatefulWidget {
   const Splashscreenl({super.key});
+
+  @override
+  State<Splashscreenl> createState() => _SplashscreenlState();
+}
+
+class _SplashscreenlState extends State<Splashscreenl> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Homescreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,3 +45,4 @@ class Splashscreenl extends StatelessWidget {
     );
   }
 }
+
