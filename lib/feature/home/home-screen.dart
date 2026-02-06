@@ -1,8 +1,13 @@
 // ignore: file_names
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:todo2_application_1/core/app_contstants.dart';
 import 'package:todo2_application_1/core/widgets/custom_app_button.dart';
+import 'package:todo2_application_1/feature/home/models/user_model.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -12,14 +17,18 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
+  final user = Hive.box<UserModel>(AppContstants.userbox).getAt(1);
   final ImagePicker picker = ImagePicker();
   XFile? image;
+  TextEditingController namecontroller = TextEditingController();
   void opencamera() async {
     await picker.pickImage(source: ImageSource.camera);
+    setState(() {});
   }
 
   void opengallery() async {
     await picker.pickImage(source: ImageSource.gallery);
+    setState(() {});
   }
 
   @override
@@ -34,32 +43,41 @@ class _HomescreenState extends State<Homescreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Visibility(
-                visible: image == null,
-                child: CircleAvatar(
-                  radius: 100.r,
-                  backgroundColor: Colors.blueAccent.shade100,
-                  child: Icon(
-                    Icons.person,
-                    size: 150.r,
-                    color: Colors.white,
+                  visible: image == null,
+                  child: CircleAvatar(
+                    radius: 100.r,
+                    backgroundColor: Colors.blueAccent.shade100,
+                    child: Icon(
+                      Icons.person,
+                      size: 150.r,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                replacement: Icon(Icons.add),
-              ),
+                  replacement: Container(
+                    width: 100.w,
+                    height: 100.h,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: Image.file(File(image?.path ?? "")).image,
+                        )),
+                  )),
               CustomAppButton(
-                title: "upload from camera",
+                title: "Upload from Camera",
                 onpressed: () {
                   opencamera();
                 },
               ),
               CustomAppButton(
-                title: "upload from gallery",
+                title: "Upload from Gallery",
                 onpressed: () {
                   opengallery();
                 },
-              ),
+),
               Divider(color: Colors.grey),
               TextFormField(
+                controller: namecontroller,
                 onTapOutside: (v) {
                   FocusScope.of(context).unfocus();
                 },
@@ -71,8 +89,21 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
               CustomAppButton(
-                title: "done",
+                title: "Login",
+                onpressed: () {
+                  print("user data: ${user?.name}");
+                  Hive.box<UserModel>(AppContstants.userbox)
+                      .add(UserModel(
+                          Image: image?.path ?? "", name: namecontroller.text))
+                      .then((v) {
+                    print("sucsses");
+                  }).catchError((e) {
+                    print("error$e");
+                  });
+                },
               ),
+              Text(user?.name??""),
+              Image.file(File(user?.Image??""))
             ],
           ),
         ),
