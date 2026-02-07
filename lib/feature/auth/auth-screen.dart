@@ -7,16 +7,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:todo2_application_1/core/app_contstants.dart';
 import 'package:todo2_application_1/core/widgets/custom_app_button.dart';
-import 'package:todo2_application_1/feature/home/models/user_model.dart';
+import 'package:todo2_application_1/feature/auth/models/user_model.dart';
+import 'package:todo2_application_1/feature/home/widgets/home-screen.dart';
 
-class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+class Authscreen extends StatefulWidget {
+  const Authscreen({super.key});
 
   @override
-  State<Homescreen> createState() => _HomescreenState();
+  State<Authscreen> createState() => _AuthscreenState();
 }
 
-class _HomescreenState extends State<Homescreen> {
+class _AuthscreenState extends State<Authscreen> {
   final user = Hive.box<UserModel>(AppContstants.userbox).getAt(1);
   final ImagePicker picker = ImagePicker();
   XFile? image;
@@ -74,7 +75,7 @@ class _HomescreenState extends State<Homescreen> {
                 onpressed: () {
                   opengallery();
                 },
-),
+              ),
               Divider(color: Colors.grey),
               TextFormField(
                 controller: namecontroller,
@@ -91,19 +92,16 @@ class _HomescreenState extends State<Homescreen> {
               CustomAppButton(
                 title: "Login",
                 onpressed: () {
-                  print("user data: ${user?.name}");
-                  Hive.box<UserModel>(AppContstants.userbox)
-                      .add(UserModel(
-                          Image: image?.path ?? "", name: namecontroller.text))
-                      .then((v) {
-                    print("sucsses");
-                  }).catchError((e) {
-                    print("error$e");
-                  });
+                  Hive.box<UserModel>(AppContstants.userbox).add(UserModel(
+                      Image: image?.path ?? "", name: namecontroller.text));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Homescreen(
+                                userdata: {},
+                              )));
                 },
               ),
-              Text(user?.name??""),
-              Image.file(File(user?.Image??""))
             ],
           ),
         ),

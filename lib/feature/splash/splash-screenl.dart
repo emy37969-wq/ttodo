@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:todo2_application_1/feature/home/home-screen.dart';
+import 'package:todo2_application_1/feature/auth/auth-screen.dart';
 
 class Splashscreenl extends StatefulWidget {
   const Splashscreenl({super.key});
@@ -18,7 +18,7 @@ class _SplashscreenlState extends State<Splashscreenl> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Homescreen()),
+        MaterialPageRoute(builder: (context) => const Authscreen()),
       );
     });
   }
@@ -45,4 +45,3 @@ class _SplashscreenlState extends State<Splashscreenl> {
     );
   }
 }
-
