@@ -15,20 +15,21 @@ class Authscreen extends StatefulWidget {
 
   @override
   State<Authscreen> createState() => _AuthscreenState();
+  
 }
 
 class _AuthscreenState extends State<Authscreen> {
-  final user = Hive.box<UserModel>(AppContstants.userbox).getAt(1);
+
   final ImagePicker picker = ImagePicker();
   XFile? image;
   TextEditingController namecontroller = TextEditingController();
   void opencamera() async {
-    await picker.pickImage(source: ImageSource.camera);
+    image = await picker.pickImage(source: ImageSource.camera);
     setState(() {});
   }
 
   void opengallery() async {
-    await picker.pickImage(source: ImageSource.gallery);
+    image = await picker.pickImage(source: ImageSource.gallery);
     setState(() {});
   }
 
@@ -66,7 +67,7 @@ class _AuthscreenState extends State<Authscreen> {
                   )),
               CustomAppButton(
                 title: "Upload from Camera",
-                onpressed: () {
+                onpressed:  () {
                   opencamera();
                 },
               ),
@@ -91,16 +92,35 @@ class _AuthscreenState extends State<Authscreen> {
               ),
               CustomAppButton(
                 title: "Login",
-                onpressed: () {
-                  Hive.box<UserModel>(AppContstants.userbox).add(UserModel(
-                      Image: image?.path ?? "", name: namecontroller.text));
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Homescreen(
-                                userdata: {},
-                              )));
+                                onpressed: () {
+                  if (image == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Image is required"),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return;
+                  }
+
+                  Hive.box<UserModel>(AppContstants.userbox)
+                      .add(
+                        UserModel(
+                          name: namecontroller.text,
+                          Image: image!
+                              .path, 
+                        ),
+                      )
+                      .then((v) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Homescreen(),
+                          ),
+                        );
+                      });
                 },
+
               ),
             ],
           ),

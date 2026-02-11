@@ -6,7 +6,7 @@ import 'package:todo2_application_1/feature/auth/models/user_model.dart';
 
 class HomeAppBar extends StatelessWidget {
   final UserModel? userData;
-  const HomeAppBar({super.key, this.userData, required UserModel userdata});
+  const HomeAppBar({super.key, this.userData});
 
   @override
   Widget build(BuildContext context) {
