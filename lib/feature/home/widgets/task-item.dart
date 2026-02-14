@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo2_application_1/feature/home/models/task-model.dart';
 
 class Taskitem extends StatelessWidget {
-  final Taskmodel task;
+  final TaskModel task;
 
   const Taskitem({super.key, required this.task});
 
@@ -15,7 +15,7 @@ class Taskitem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r), color: task.color),
       child: Row(
         children: [
-          Expanded(
+          Expanded( 
               child: Column(
             spacing: 10.h,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,11 +28,11 @@ class Taskitem extends StatelessWidget {
                     color: Colors.white),
               ),
               Text(
-                "${task.startitem}  | ${task.enditem}",
+                "${task.startTime}  | ${task.endTime}",
                 style: TextStyle(fontSize: 18.sp, color: Colors.white),
               ),
               Text(
-                task.descreption,
+                task.description,
                 style: TextStyle(fontSize: 18.sp, color: Colors.white),
               ),
             ],
@@ -48,10 +48,10 @@ class Taskitem extends StatelessWidget {
           RotatedBox(
               quarterTurns: 3,
               child: Text(
-                task.statustext,
+                task.statusText,
                 style: TextStyle(
                     fontSize: 20.sp,
-                    color: Colors.white,
+                    color: const Color.fromARGB(255, 219, 219, 219),
                     fontWeight: FontWeight.bold),
               )),
         ],

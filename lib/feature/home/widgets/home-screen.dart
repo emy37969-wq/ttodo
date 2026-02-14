@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'package:todo2_application_1/core/app_contstants.dart';
+import 'package:todo2_application_1/feature/add%20task/add-task-screen.dart';
 import 'package:todo2_application_1/feature/auth/models/user_model.dart';
 import 'package:todo2_application_1/feature/home/models/task-model.dart';
 import 'package:todo2_application_1/feature/home/widgets/add-task-row.dart';
@@ -27,28 +29,33 @@ class Homescreen extends StatelessWidget {
             SizedBox(
               height: 20.h,
             ),
-            Addtaskrow(),
+            Addtaskrow(onPressed: () async {
+              await Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddTaskScreen()));
+              
+            }),
             SizedBox(
               height: 20.h,
             ),
-            Expanded(
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return Dismissible(
-                      background: Icon(Icons.delete),
-                      secondaryBackground: Icon(Icons.add_a_photo),
-                      key: UniqueKey(),
-                      child: Taskitem(
-                        task: alltasks[index],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                        height: 10.h,
-                      ),
-                      
-                  itemCount: alltasks.length),
-            ),
+            allTasks.isEmpty
+                ? Lottie.asset("assets/empty.json")
+                : Expanded(
+                    child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return Dismissible(
+                            background: Icon(Icons.delete),
+                            secondaryBackground: Icon(Icons.add_a_photo),
+                            key: UniqueKey(),
+                            child: Taskitem(
+                              task: allTasks[index],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 10.h,
+                            ),
+                        itemCount: allTasks.length),
+                  ),
           ],
         ),
       )),

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:todo2_application_1/core/widgets/custom_app_button.dart';
+import 'package:todo2_application_1/feature/add%20task/add-task-screen.dart';
 
 class Addtaskrow extends StatelessWidget {
-  const Addtaskrow({super.key});
+  const Addtaskrow({super.key, required Future<Null> Function() onPressed});
 
   @override
   Widget build(BuildContext context) {
-    
     return Row(
       children: [
         Expanded(
@@ -25,7 +25,10 @@ class Addtaskrow extends StatelessWidget {
           width: 150.w,
           child: CustomAppButton(
             title: "+ Add Task",
-            onpressed: () {},
+            onpressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => (AddTaskScreen())));
+            }, onPressed: () {  },
           ),
         )
       ],

@@ -5,7 +5,7 @@ class CustomAppButton extends StatelessWidget {
   final String title;
   final void Function()? onpressed;
   
-  const CustomAppButton({super.key, required this.title, this.onpressed,});
+  const CustomAppButton({super.key, required this.title, this.onpressed, required Null Function() onPressed,});
 
   @override
   Widget build(BuildContext context) {

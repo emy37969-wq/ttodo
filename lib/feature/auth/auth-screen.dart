@@ -13,9 +13,9 @@ import 'package:todo2_application_1/feature/home/widgets/home-screen.dart';
 class Authscreen extends StatefulWidget {
   const Authscreen({super.key});
 
-  @override
+  @override  
   State<Authscreen> createState() => _AuthscreenState();
-  
+
 }
 
 class _AuthscreenState extends State<Authscreen> {
@@ -69,27 +69,16 @@ class _AuthscreenState extends State<Authscreen> {
                 title: "Upload from Camera",
                 onpressed:  () {
                   opencamera();
-                },
+                }, onPressed: () {  },
               ),
               CustomAppButton(
                 title: "Upload from Gallery",
                 onpressed: () {
                   opengallery();
-                },
+                }, onPressed: () {  },
               ),
               Divider(color: Colors.grey),
-              TextFormField(
-                controller: namecontroller,
-                onTapOutside: (v) {
-                  FocusScope.of(context).unfocus();
-                },
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.indigoAccent),
-                  ),
-                ),
-              ),
+              
               CustomAppButton(
                 title: "Login",
                                 onpressed: () {
@@ -106,9 +95,8 @@ class _AuthscreenState extends State<Authscreen> {
                   Hive.box<UserModel>(AppContstants.userbox)
                       .add(
                         UserModel(
-                          name: namecontroller.text,
                           Image: image!
-                              .path, 
+                              .path, name: '', 
                         ),
                       )
                       .then((v) {
@@ -119,7 +107,7 @@ class _AuthscreenState extends State<Authscreen> {
                           ),
                         );
                       });
-                },
+                }, onPressed: () {  },
 
               ),
             ],
