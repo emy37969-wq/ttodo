@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:todo2_application_1/core/app_contstants.dart';
+import 'package:todo2_application_1/core/widgets/custom-text-form-filed.dart';
 import 'package:todo2_application_1/core/widgets/custom_app_button.dart';
 import 'package:todo2_application_1/feature/auth/models/user_model.dart';
 import 'package:todo2_application_1/feature/home/widgets/home-screen.dart';
@@ -67,21 +68,22 @@ class _AuthscreenState extends State<Authscreen> {
                   )),
               CustomAppButton(
                 title: "Upload from Camera",
-                onpressed:  () {
+                onPressed:  () {
                   opencamera();
-                }, onPressed: () {  },
+                }
               ),
               CustomAppButton(
                 title: "Upload from Gallery",
-                onpressed: () {
+                onPressed: () {
                   opengallery();
-                }, onPressed: () {  },
+                }
               ),
-              Divider(color: Colors.grey),
+              Divider(color: const Color.fromRGBO(158, 158, 158, 1)),
+              CustomTextFormFiled(controller: namecontroller,hintText: "",),
               
               CustomAppButton(
                 title: "Login",
-                                onpressed: () {
+                                onPressed: () {
                   if (image == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -103,11 +105,11 @@ class _AuthscreenState extends State<Authscreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Homescreen(),
+                            builder: (context) => const HomeScreen(),
                           ),
                         );
                       });
-                }, onPressed: () {  },
+                }
 
               ),
             ],

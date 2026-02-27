@@ -25,10 +25,10 @@ class Addtaskrow extends StatelessWidget {
           width: 150.w,
           child: CustomAppButton(
             title: "+ Add Task",
-            onpressed: () {
+            onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => (AddTaskScreen())));
-            }, onPressed: () {  },
+            }
           ),
         )
       ],

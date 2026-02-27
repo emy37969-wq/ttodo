@@ -3,9 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppButton extends StatelessWidget {
   final String title;
-  final void Function()? onpressed;
-  
-  const CustomAppButton({super.key, required this.title, this.onpressed, required Null Function() onPressed,});
+  final void Function()? onPressed;
+  const CustomAppButton({
+    super.key,
+    required this.title,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +17,18 @@ class CustomAppButton extends StatelessWidget {
         backgroundColor: Colors.indigo,
         minimumSize: Size(double.infinity, 60.h),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(20.r),
         ),
       ),
-      onPressed: onpressed,
+      onPressed: onPressed,
       child: Text(
         title,
         style: TextStyle(
           color: Colors.white,
           fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
         ),
+        textAlign: TextAlign.center,
       ),
     );
   }
