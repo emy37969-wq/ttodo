@@ -1,19 +1,23 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+part 'task_model.g.dart';
 
+@HiveType(typeId: 1)
 class TaskModel {
+  @HiveField(0)
   String title;
-
+  @HiveField(1)
   String startTime;
-
+@HiveField(2)
   String endTime;
-
+@HiveField(3)
   String description;
-
+@HiveField(4)
   String statusText;
-
-  Color color;
+@HiveField(5)
+  int color;
 
   TaskModel(
       {required this.title,

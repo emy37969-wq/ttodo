@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo2_application_1/feature/home/models/task-model.dart';
+import 'package:todo2_application_1/feature/home/models/task_model.dart';
 
 class Taskitem extends StatelessWidget {
   final TaskModel task;
@@ -12,7 +12,7 @@ class Taskitem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r), color: task.color),
+          borderRadius: BorderRadius.circular(12.r), color: Color(task.color)),
       child: Row(
         children: [
           Expanded( 

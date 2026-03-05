@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo2_application_1/feature/splash/splash-screenl.dart';
+import 'package:todo2_application_1/feature/update-profile/update-profile-screen.dart';
 
 class Todoapp extends StatelessWidget {
   const Todoapp({super.key});
@@ -13,7 +14,7 @@ class Todoapp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        home: Splashscreenl()
+        home: Updateprofilescreen()
       ),
     );
   }
