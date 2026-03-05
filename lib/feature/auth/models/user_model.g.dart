@@ -18,7 +18,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
     };
     return UserModel(
       Image: fields[0] as String,
-      name: fields[1] as String,
+      name: fields[1] as String, image: '',
     );
   }
 

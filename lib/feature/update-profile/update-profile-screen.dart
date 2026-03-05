@@ -7,7 +7,7 @@ import 'package:todo2_application_1/core/widgets/custom-text-form-filed.dart';
 import 'package:todo2_application_1/core/widgets/custom_app_button.dart';
 
 class Updateprofilescreen extends StatefulWidget {
-  const Updateprofilescreen({super.key});
+  const Updateprofilescreen({super.key, required String name, required String image});
 
   @override
   State<Updateprofilescreen> createState() => _UpdateprofilescreenState();
@@ -112,11 +112,17 @@ class _UpdateprofilescreenState extends State<Updateprofilescreen> {
                               hintText: "",
                             ),
                           ),
-                          CustomAppButton(
-                              title: "Update Your Name",
-                              onPressed: () {
-                              }),
-                        ],
+ElevatedButton(
+  onPressed: () {
+
+    Navigator.pop(
+      context,
+      namecontroller.text,
+    );
+
+  },
+  child: Text("Update Name"),
+)                        ],
                       ),
                     );
                   });

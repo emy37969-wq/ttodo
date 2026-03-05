@@ -98,7 +98,7 @@ class _AuthscreenState extends State<Authscreen> {
                       .add(
                         UserModel(
                           Image: image!
-                              .path, name: '', 
+                              .path, name: '', image: '', 
                         ),
                       )
                       .then((v) {

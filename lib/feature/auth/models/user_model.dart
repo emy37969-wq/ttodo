@@ -13,5 +13,5 @@ class UserModel {
   String Image;
     @HiveField(1)
   String name;
-  UserModel({required this.Image, required this.name});
+  UserModel({required this.Image, required this.name, required String image});
 }
